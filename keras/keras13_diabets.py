@@ -26,16 +26,17 @@ print(np.min(y), np.max(y))
 #2. 모델구성
 
 model = Sequential()
-model.add(Dense(128, input_dim=10))
-model.add(Dense(32))
-model.add(Dense(32))
-model.add(Dense(16))
+model.add(Dense(100, input_dim=10, activation='relu'))
+model.add(Dense(50, activation='relu')) 
+model.add(Dense(25, activation='relu'))
+model.add(Dense(1, activation='relu'))# 활성화함수의 디폴트값이 있다.
 model.add(Dense(1))
+ # 마지막 레이어에 활성화함수를 쓰지 않는다.
 
 #3. 컴파일, 훈련
 
-model.compile(loss="mse", optimizer="adam", loss_weights=1)
-model.fit(x_train, y_train, epochs=1000, validation_split=0.2,  batch_size=1)
+model.compile(loss="mse", optimizer="adam")
+model.fit(x_train, y_train, epochs=1000, validation_split=0.2,  batch_size=1, verbose=2)
 
 #4. 평가, 예측
 
@@ -43,7 +44,6 @@ loss = model.evaluate(x_test, y_test)
 print('loss : ', loss)
 
 y_predict = model.predict(x_test)
-print('y_predict : ', y_predict)
 
 r2 = r2_score(y_test, y_predict)
 print('r2 score : ', r2)
@@ -52,3 +52,38 @@ print('r2 score : ', r2)
 
 # 과제 1.
 # 0.62 까지 올릴것!!
+
+'''
+model = Sequential()
+model.add(Dense(100, input_dim=10, activation='relu'))
+model.add(Dense(70, activation='relu')) 
+model.add(Dense(50, activation='relu'))
+model.add(Dense(30, activation='relu'))
+model.add(Dense(10, activation='relu'))
+model.add(Dense(1))
+epochs=10, validation_split=0.2,  batch_size=1
+r2 score :  0.46081133017628084
+'''
+
+'''
+model = Sequential()
+model.add(Dense(100, input_dim=10, activation='relu'))
+model.add(Dense(50, activation='relu')) 
+model.add(Dense(25, activation='relu'))
+model.add(Dense(1, activation='relu'))
+model.add(Dense(1))
+epochs=100, batch_size=1
+r2 score :  0.461552699146519
+'''
+
+'''
+model = Sequential()
+model.add(Dense(100, input_dim=10, activation='relu'))
+model.add(Dense(50, activation='relu')) 
+model.add(Dense(25, activation='relu'))
+model.add(Dense(1, activation='relu'))
+model.add(Dense(1))
+epochs=1000, batch_size=1
+loss :  5555.11669921875
+r2 score :  0.08093484703570464
+'''

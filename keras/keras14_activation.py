@@ -34,8 +34,8 @@ model.add(Dense(1)) # 활성화함수의 디폴트값이 있다.
 
 #3. 컴파일, 훈련
 
-model.compile(loss="mse", optimizer="adam", loss_weights=32)
-model.fit(x_train, y_train, epochs=1000, validation_split=0.2,  batch_size=16)
+model.compile(loss="mse", optimizer="adam")
+model.fit(x_train, y_train, epochs=100, validation_split=0.2,  batch_size=1)
 
 #4. 평가, 예측
 
