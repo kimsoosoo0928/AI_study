@@ -20,8 +20,8 @@ x_train, x_test, y_train, y_test = train_test_split(x, y,
         train_size=0.7,test_size=0.3, shuffle=True, random_state=9) 
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-scaler = MinMaxScaler()
-# scaler = StandardScaler()
+# scaler = MinMaxScaler()
+scaler = StandardScaler()
 scaler.fit(x_train) 
 x_train = scaler.transform(x_train) 
 x_test = scaler.transform(x_test)
@@ -39,7 +39,7 @@ model.add(Dense(1))
 
 #3. 컴파일, 훈련 
 model.compile(loss="mse", optimizer="adam")
-model.fit(x_train, y_train, epochs=300, batch_size=4)
+model.fit(x_train, y_train, epochs=300, batch_size=32)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
@@ -51,14 +51,13 @@ print('r2 score : ', r2)
 
 '''
 -MinMaxScaler-
-epochs=100, batch_size=4
-loss :  3458.058349609375
-r2 score :  0.44496739192187895
+epochs=300, batch_size=32
+r2 score :  0.6053326096394793
 '''
 
 '''
 -StandardScaler-
-epochs=300, batch_size=4
-r2 score :  0.4567472827465996
+epochs=300, batch_size=32
+r2 score :  0.5798717386532026
 '''
 

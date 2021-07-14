@@ -19,7 +19,7 @@ from sklearn.preprocessing import MaxAbsScaler, RobustScaler, QuantileTransforme
 # scaler = MaxAbsScaler()
 # scaler = RobustScaler()
 # scaler = QuantileTransformer()
-scaler = PowerTransformer()
+# scaler = PowerTransformer()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train) 
 x_test = scaler.transform(x_test)
@@ -34,8 +34,8 @@ model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련 
-model.compile(loss="mse", optimizer="adam")
-model.fit(x_train, y_train, epochs=100, batch_size=4)
+model.compile(loss="mse", optimizer="adam", loss_weights=1)
+model.fit(x_train, y_train, epochs=300, batch_size=32, validation_split=0.1)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
@@ -45,11 +45,12 @@ y_predict = model.predict(x_test)
 r2 = r2_score(y_test, y_predict)
 print('r2 score : ', r2)
 
-''' common : epochs=100, batch_size=4
+''' 
+common : model.compile(loss="mse", optimizer="adam", loss_weights=1)
+model.fit(x_train, y_train, epochs=300, batch_size=32, validation_split=0.1)
 
 -MaxAbsScaler-
-loss :  7.415894985198975
-r2 score :  0.9102377597798514
+r2 score :  0.9226447525839759
 
 -RobustScaler-
 loss :  8.780695915222168
