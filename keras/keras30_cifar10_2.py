@@ -41,7 +41,7 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['mse',
 from tensorflow.keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', patience=15, mode='min', verbose=1)
 
-model.fit(x_train, y_train, epochs=1, batch_size=576, verbose=2,
+model.fit(x_train, y_train, epochs=10000, batch_size=512, verbose=2,
     validation_split=0.0005, callbacks=[es])
 
 # 4. predict eval -> no need to
@@ -49,3 +49,9 @@ model.fit(x_train, y_train, epochs=1, batch_size=576, verbose=2,
 loss = model.evaluate(x_test, y_test)
 print('loss[category] : ', loss[0])
 print('loss[accuracy] : ', loss[2])
+
+
+'''
+epochs=10000, batch_size=512
+loss[accuracy] :  0.6794000267982483
+'''
