@@ -39,7 +39,7 @@ model.add(Dense(10, activation='softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['mse', 'accuracy'])
 
 from tensorflow.keras.callbacks import EarlyStopping
-es = EarlyStopping(monitor='val_loss', patience=15, mode='min', verbose=1)
+es = EarlyStopping(monitor='val_loss', patience=25, mode='min', verbose=1)
 
 model.fit(x_train, y_train, epochs=10000, batch_size=512, verbose=2,
     validation_split=0.0005, callbacks=[es])
@@ -52,6 +52,12 @@ print('loss[accuracy] : ', loss[2])
 
 
 '''
-epochs=10000, batch_size=512
+epochs=10000, batch_size=512, patience=15
 loss[accuracy] :  0.6794000267982483
+
+epochs=10000, batch_size=512, patience=20
+loss[accuracy] :  0.6983000040054321
+
+epochs=10000, batch_size=512, patience=25
+loss[accuracy] :  0.7107999920845032
 '''
