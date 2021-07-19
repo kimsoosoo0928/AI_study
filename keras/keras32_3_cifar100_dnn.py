@@ -82,7 +82,7 @@ model.add(Dense(100, activation='softmax'))
 # 3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
 
-es = EarlyStopping(monitor= 'loss', patience=50, mode='min', verbose=1)
+es = EarlyStopping(monitor= 'loss', patience=10, mode='min', verbose=1)
 
 import time
 

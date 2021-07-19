@@ -47,4 +47,4 @@ model.fit(x_train, y_train, epochs=10000, batch_size=64, verbose=2,
 
 loss = model.evaluate(x_test, y_test)
 print('loss[category] : ', loss[0])
-print('loss[accuracy] : ', loss[2])
+print('loss[accuracy] : ', loss[1])

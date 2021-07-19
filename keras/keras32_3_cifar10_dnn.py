@@ -14,12 +14,12 @@ print(x_test.shape, y_test.shape)       # (10000, 32, 32, 3)
 # 1.1 데이터 전처리
 
 # CNN shape
-x_train = x_train.reshape(60000, 28, 28, 1) 
-x_test = x_test.reshape(10000, 28, 28, 1)
+x_train = x_train.reshape(50000, 32, 32, 3) 
+x_test = x_test.reshape(10000, 32, 32, 3)
 
 # DNN shape
-# x_train = x_train.reshape(60000, 28 * 28)   #! 6만 행 의 28 * 28 열 인 2차원 데이터로 만들어서 CNN 모델 말고 DNN 모델로 할 수 있다.
-# x_test = x_test.reshape(10000, 28 * 28)
+# x_train = x_train.reshape(50000, 32 * 32)  
+# x_test = x_test.reshape(10000, 32 * 32)
 
 ohe = OneHotEncoder()
 y_train = y_train.reshape(-1,1)
@@ -34,7 +34,7 @@ from tensorflow.keras.layers import Dense, Conv2D, Flatten, MaxPool2D, Dropout
 
 model = Sequential()
 # CNN 모델
-# model.add(Conv2D(filters=20, kernel_size=(3,3), padding='same', input_shape=( 28, 28, 1)))
+# model.add(Conv2D(filters=20, kernel_size=(3,3), padding='same', input_shape=( 32, 32, 3)))
 # model.add(Conv2D(30, (3,3),padding='same', activation='relu'))             
 # model.add(Conv2D(40, (4,4), activation='relu'))               
 # model.add(MaxPool2D())
