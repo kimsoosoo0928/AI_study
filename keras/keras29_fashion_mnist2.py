@@ -44,7 +44,7 @@ es = EarlyStopping(monitor='val_loss', patience=15, mode='min', verbose=1)
 model.fit(x_train, y_train, epochs=1000, batch_size=32, verbose=2,
     validation_split=0.0005, callbacks=[es])
 
-# 4. predict eval -> no need to
+# 4. predict eval -> 
 
 loss = model.evaluate(x_test, y_test)
 print('loss[category] : ', loss[0])

@@ -16,7 +16,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y,
         train_size=0.7,test_size=0.3, shuffle=True, random_state=66) 
 
 from sklearn.preprocessing import MaxAbsScaler, RobustScaler, QuantileTransformer, PowerTransformer
-# scaler = MaxAbsScaler()
+ scaler = MaxAbsScaler()
 # scaler = RobustScaler()
 # scaler = QuantileTransformer()
 # scaler = PowerTransformer()

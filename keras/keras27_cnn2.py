@@ -13,10 +13,6 @@ model.add(Dense(64,activation='relu'))
 model.add(Dense(32))
 model.add(Dense(1, activation='sigmoid'))
 
-# node를 줄이자!
-model.add(Dense(64, activation='relu'))
-model.add(Dense(32))
-model.add(Dense(1, activation='sigmoid'))
 
 model.summary()
 
