@@ -34,4 +34,5 @@ model.summary()
 # model.summary() # 항상 사용한다. 
 
 #3. 컴파일, 훈련
+
 #4. 평가 예측
