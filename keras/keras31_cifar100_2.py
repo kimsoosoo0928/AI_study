@@ -6,8 +6,8 @@ from tensorflow.keras.datasets import cifar100
 # 1. data
 (x_train, y_train), (x_test, y_test) = cifar100.load_data() # (50000, 32, 32, 3) (50000, 1), (10000, 32, 32, 3) (10000, 1)
 
-x_train = x_train.reshape(50000, 32, 32, 3)/255. # (50000, 32, 32, 3)
-x_test = x_test.reshape(10000, 32, 32, 3)/255. # (10000, 28, 32, 3)
+x_train = x_train.reshape(50000, 32, 32, 3) # (50000, 32, 32, 3)
+x_test = x_test.reshape(10000, 32, 32, 3) # (10000, 28, 32, 3)
 
 from sklearn.preprocessing import OneHotEncoder
 one = OneHotEncoder()

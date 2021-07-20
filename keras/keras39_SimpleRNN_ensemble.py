@@ -69,3 +69,7 @@ model.fit([x1, x2], y, epochs=100, batch_size=1, callbacks=[es])
 #4. 평가, 예측
 y_pred = model.predict([x1_predict, x2_predict])
 print('y_pred : ', y_pred)
+
+'''
+y_pred :  [[91.14826]]
+'''

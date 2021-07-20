@@ -18,7 +18,7 @@ print(datasets.feature_names)
 x = datasets.data
 y = datasets.target
 
-print(x.shape, y.shape) # 150, 4) (150,)
+print(x.shape, y.shape) # (150, 4) (150,)
 print(y)
 
 # 원핫인코딩 one-hot-encoding (150,) -> (150, 3)

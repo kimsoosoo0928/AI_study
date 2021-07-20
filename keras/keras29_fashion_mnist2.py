@@ -6,8 +6,8 @@ from tensorflow.keras.datasets import fashion_mnist
 # 1. data
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data() # (60000, 28, 28) (60000,) (10000, 28, 28) (10000,)
 
-x_train = x_train.reshape(60000, 28, 28, 1)/255. # (60000, 28, 28, 1)
-x_test = x_test.reshape(10000, 28, 28, 1)/255. # (10000, 28, 28, 1)
+x_train = x_train.reshape(60000, 28, 28, 1) # (60000, 28, 28, 1)
+x_test = x_test.reshape(10000, 28, 28, 1) # (10000, 28, 28, 1)
 
 from sklearn.preprocessing import OneHotEncoder
 one = OneHotEncoder()
