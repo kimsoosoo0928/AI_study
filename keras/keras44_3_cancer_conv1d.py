@@ -1,11 +1,14 @@
-# diabets
 # LSTM
 
 import numpy as np
-from sklearn import datasets
 from sklearn.datasets import load_breast_cancer
-from sklearn.metrics import r2_score
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Conv2D, Dropout, LSTM, Conv1D, Flatten, Reshape, GlobalAveragePooling2D
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, MaxAbsScaler, RobustScaler, QuantileTransformer, PowerTransformer
+from tensorflow.keras.callbacks import EarlyStopping
+import time
 
 # 1. data 
 datasets = load_breast_cancer()
@@ -29,16 +32,52 @@ x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], 1)
 # 2. model
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, LSTM, Dropout, Input, Conv1D
-from tensorflow.python.keras.layers.core import Flatten
 
 model = Sequential()
-model.add(Conv1D(64, 2, input_shape=(30, 1)))
-model.add(LSTM(64, return_sequences=True)) # LSTM 다음에 Conv 사용하는경우가 많다.
-model.add(Conv1D(64,2 ))
+
+# #DNN 모델
+# model.add(Dense(150, activation='relu', input_dim = 10))
+# model.add(Dense(80, activation='relu'))
+# model.add(Dense(40, activation='relu'))
+# model.add(Dense(20, activation='relu'))
+# model.add(Dense(10, activation='relu'))
+# model.add(Dense(5, activation='relu'))
+# model.add(Dense(1, activation='relu'))
+
+# #CNN 모델
+# model.add(Conv2D(filters=32, kernel_size=(2,1), padding='same', activation='relu', input_shape=(10,1, 1)))
+# model.add(Conv2D(64, (2,1), padding='same', activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Conv2D(128, (2,1) , padding='same', activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Conv2D(64, (2,1), padding='same', activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Conv2D(32, (2,1), padding='same', activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Conv2D(16, (2,1), padding='same', activation='relu'))
+# model.add(GlobalAveragePooling2D())
+# model.add(Dense(1))
+
+# #LSTM모델
+# model.add(LSTM(units=256, activation='relu', input_shape=(10,1)))
+# model.add(Dropout(0.2))
+# model.add(Dense(128, activation='relu'))
+# model.add(Dense(64, activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Dense(32, activation='relu'))
+# model.add(Dense(16, activation='relu'))
+# model.add(Dropout(0.2))
+# model.add(Dense(8, activation='relu'))
+# model.add(Dense(1))
+
+#Conv1D 모델
+model.add(Conv1D(128, 2, activation='relu', input_shape=(30, 1)))
 model.add(Flatten())
-model.add(Dense(10))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(8, activation='relu'))
 model.add(Dense(1))
-model.summary()
 
 # 3. compile, fit
 model.compile(loss='mse', optimizer='adam')
@@ -53,22 +92,25 @@ model.fit(x_train, y_train, epochs=100, batch_size=32, verbose=2,
 end_time = time.time() - start_time
 
 # 4. evaluate, predict
-y_predict = model.predict([x_test])
-print('x의 예측값 : ', y_predict)
-
 loss = model.evaluate(x_test, y_test)
-print("time : ", end_time)
+
+print('=' * 25)
+print('걸린시간 : ', end_time)
 print('loss : ', loss)
+
+y_predict = model.predict(x_test)
+
 r2 = r2_score(y_test, y_predict)
-print('R^2 score : ', r2)
+print('r2 : ', r2)
 
 '''
+LSTM
 time :  219.6225550174713
 loss :  0.015863828361034393
 R^2 score :  0.9311171687807814
 
 LSTM + Conv1D
-time :  18.84168267250061
-loss :  0.043441880494356155
-R^2 score :  0.8113696457581897
+걸린시간 :  13.280251502990723
+loss :  0.02122466266155243
+r2 :  0.9078397363448328
 '''

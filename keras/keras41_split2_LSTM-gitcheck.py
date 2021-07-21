@@ -1,26 +1,27 @@
-# 1 ~ 100 까지의 데이터를 
-
-# x                    y
-# 1, 2, 3, 4, 5        6
-# ...
-# 95, 96, 97, 98, 99   100
-
+# RNN을 위한 data shaping(splitting function)
+import time
 import numpy as np
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Input, SimpleRNN, Dropout, LSTM, GRU
+from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import r2_score
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler, QuantileTransformer, OneHotEncoder
+from sklearn.metrics import r2_score, mean_squared_error
+
 
 # 1. data
 
 x_data = np.array(range(1, 101))
 x_predict = np.array(range(96, 105))
-#         x               y
-# 96, 97, 98, 99, 100     ?
-# ...
-# 101, 102, 103, 104, 105 ?
 
-# 예상 결과값 : 101, 102, 103, 104, 105, 106
+def split_x(dataset, size):
+    aaa = []
+    for i in range(len(dataset) - size + 1):
+        subset = dataset[i : (i + size)]
+        aaa.append(subset)
+    return np.array(aaa)
+dataset = split_x(x_data, 6)
 
-size = 5
 
 def split_x(dataset, size):
     aaa = [] 
@@ -29,7 +30,8 @@ def split_x(dataset, size):
         aaa.append(subset) 
     return np.array(aaa) 
 
-dataset = split_x(x_data, size)
+dataset = split_x(a, size)
+dataset2 = split_x(x_predict, size)
 
 print(dataset)
 
