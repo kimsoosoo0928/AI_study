@@ -54,13 +54,13 @@ from tensorflow.keras.layers import Dense, Conv1D, Flatten, MaxPool1D, GlobalAve
 
 # import time 
 # start_time = time.time()
-# model.fit(x_train, y_train, epochs=100, batch_size=1024, verbose=2,
+# model.fit(x_train, y_train, epochs=10, batch_size=32, verbose=2,
 #     validation_split=0.05, callbacks=[es, cp])
 # end_time = time.time() - start_time
 
 # model.save('./_save/ModelCheckPoint/keras48_cifar100_model_save.h5')
-model = load_model('./_save/ModelCheckPoint/keras48_cifar100_model_save.h5')
-# model = load_model('./_save/ModelCheckPoint/keras48_cifar100_MCP.hdf5')
+# model = load_model('./_save/ModelCheckPoint/keras48_cifar100_model_save.h5')
+model = load_model('./_save/ModelCheckPoint/keras48_cifar100_MCP.hdf5')
 
 # 4. predict eval -> no need to
 
@@ -68,3 +68,21 @@ loss = model.evaluate(x_test, y_test)
 # print("time : ", end_time)
 print('loss : ', loss[0])
 print('acc : ', loss[1])
+
+'''
+model
+loss :  7.19950008392334
+acc :  0.2623000144958496
+
+save_model
+loss :  7.450496196746826
+acc :  0.2752000093460083
+
+load_model
+loss :  7.450496196746826
+acc :  0.2752000093460083
+
+check_point
+loss :  2.8178858757019043
+acc :  0.3028999865055084
+'''

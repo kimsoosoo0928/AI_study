@@ -34,7 +34,7 @@ y_test = one.transform(y_test).toarray() # (10000, 10)
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Conv1D, Flatten, MaxPool1D, GlobalAveragePooling1D, Dropout
 
-# model = Sequential()
+model = Sequential()
 # model.add(Conv1D(filters=32, kernel_size=2, padding='same',                        
 #                         activation='relu' ,input_shape=(32*32, 3))) 
 # model.add(Conv1D(32, 2, padding='same', activation='relu'))                   
@@ -57,17 +57,35 @@ from tensorflow.keras.layers import Dense, Conv1D, Flatten, MaxPool1D, GlobalAve
 # import time 
 
 # start_time = time.time()
-# model.fit(x_train, y_train, epochs=100, batch_size=1024, verbose=2,
+# model.fit(x_train, y_train, epochs=10, batch_size=32, verbose=2,
 #     validation_split=0.05, callbacks=[es, cp])
 # end_time = time.time() - start_time
 
 # model.save('./_save/ModelCheckPoint/keras48_cifar10_model_save.h5')
-model = load_model('./_save/ModelCheckPoint/keras48_cifar10_model_save.h5')
-# model = load_model('./_save/ModelCheckPoint/keras48_cifar10_MCP.hdf5')
+# model = load_model('./_save/ModelCheckPoint/keras48_cifar10_model_save.h5')
+model = load_model('./_save/ModelCheckPoint/keras48_cifar10_MCP.hdf5')
 
-# 4. predict eval -> no need to
+# 4. predict eval 
 
 loss = model.evaluate(x_test, y_test)
 # print("time : ", end_time)
 print('loss : ', loss[0])
 print('acc : ', loss[1])
+
+'''
+model
+loss :  2.392120361328125
+acc :  0.6086000204086304
+
+save_model
+loss :  2.2956676483154297
+acc :  0.6029999852180481
+
+load_model
+loss :  2.2956676483154297
+acc :  0.6029999852180481
+
+check_point
+loss :  1.071603775024414
+acc :  0.6205999851226807
+'''
